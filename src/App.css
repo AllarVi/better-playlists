@@ -1,3 +1,7 @@
+html, body {
+  background-color: #403D39;
+}
+
 .App {
   text-align: center;
 }
@@ -31,6 +35,3 @@
   }
 }
 
-html {
-  background-color: #403D39;
-}
