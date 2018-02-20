@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 
-let defaultStyle = {
+const defaultStyle = {
   color: '#FFFCF2',
 }
 
@@ -126,7 +126,7 @@ class Playlist extends Component {
     return (
       <div style={{...defaultStyle, width: '25%', display: 'inline-block'}}>
         <img/>
-        <h3>Playlist Name</h3>
+        <h3>{this.props.playlist.name}</h3>
         <ul>
           <li>Song 1</li>
           <li>Song 2</li>
@@ -165,10 +165,11 @@ class App extends Component {
               <PlaylistsCounter playlists={this.state.serverData.user.playlists}/>
               <HoursCounter playlists={this.state.serverData.user.playlists}/>
               <Filter/>
-              <Playlist/>
-              <Playlist/>
-              <Playlist/>
-              <Playlist/>
+              {
+                this.state.serverData.user.playlists.map(playlist =>
+                  <Playlist playlist={playlist}/>
+                )
+              }
             </div> : <h1 style={defaultStyle}>Loading...</h1>
         }
       </div>
