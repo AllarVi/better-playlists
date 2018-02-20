@@ -1,4 +1,9 @@
 import React, {Component} from 'react';
+
+import PlaylistsCounter from './playlists-counter/PlaylistsCounter';
+import HoursCounter from './hours-counter/HoursCounter';
+import Filter from './filter/Filter';
+import Playlist from './playlist/Playlist';
 import './App.css';
 
 
@@ -45,7 +50,7 @@ let fakeServerData = {
         ]
       },
       {
-        name: 'Playlist 3',
+        name: 'Playlist.js 3',
         songs: [
           {
             name: 'Le Song',
@@ -62,7 +67,7 @@ let fakeServerData = {
         ]
       },
       {
-        name: 'Playlist 4',
+        name: 'Playlist.js 4',
         songs: [
           {
             name: 'Le Song',
@@ -79,62 +84,6 @@ let fakeServerData = {
         ]
       },
     ]
-  }
-}
-
-class HoursCounter extends Component {
-  render() {
-    let allSongs = this.props.playlists.reduce((songs, eachPlaylist) => {
-      return songs.concat(eachPlaylist.songs)
-    }, [])
-
-    let totalDuration = allSongs.reduce((sum, eachSong) => {
-      return sum + eachSong.duration
-    }, 0)
-
-    return (
-      <div style={{...defaultStyle, width: '40%', display: 'inline-block'}}>
-        <h2>{Math.round(totalDuration / 60)} hours</h2>
-      </div>
-    );
-  }
-}
-
-class PlaylistsCounter extends Component {
-  render() {
-    return (
-      <div style={{...defaultStyle, width: '40%', display: 'inline-block'}}>
-        <h2>{this.props.playlists.length} playlists</h2>
-      </div>
-    );
-  }
-}
-
-class Filter extends Component {
-  render() {
-    return (
-      <div style={defaultStyle}>
-        <img/>
-        <input type="text"/>
-      </div>
-    );
-  }
-}
-
-class Playlist extends Component {
-  render() {
-    let playlist = this.props.playlist;
-    return (
-      <div style={{...defaultStyle, width: '25%', display: 'inline-block'}}>
-        <img/>
-        <h3>{playlist.name}</h3>
-        <ul>
-          {playlist.songs.map(song =>
-            <li>{song.name}</li>
-          )}
-        </ul>
-      </div>
-    );
   }
 }
 

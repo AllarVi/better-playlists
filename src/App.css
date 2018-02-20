@@ -25,3 +25,6 @@ html, body {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.blue {
+  color: #4644ff; }
