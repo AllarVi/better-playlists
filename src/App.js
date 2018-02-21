@@ -16,6 +16,7 @@ let fakeServerData = {
     name: 'Allar',
     playlists: [
       {
+        id: 1,
         name: 'My favourites',
         songs: [
           {
@@ -33,6 +34,7 @@ let fakeServerData = {
         ]
       },
       {
+        id: 2,
         name: 'Discover Weekly',
         songs: [
           {
@@ -50,6 +52,7 @@ let fakeServerData = {
         ]
       },
       {
+        id: 3,
         name: 'Playlist.js 3',
         songs: [
           {
@@ -67,6 +70,7 @@ let fakeServerData = {
         ]
       },
       {
+        id: 4,
         name: 'Playlist.js 4',
         songs: [
           {
@@ -85,20 +89,23 @@ let fakeServerData = {
       },
     ]
   }
-}
+};
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {serverData: {}}
+    this.state = {
+      serverData: {},
+      filterString: '',
+    }
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        serverData: fakeServerData
+        serverData: fakeServerData,
       })
-    }, 1000)
+    }, 1000);
   }
 
   render() {
@@ -107,18 +114,24 @@ class App extends Component {
         {
           this.state.serverData.user ?
             <div>
-              <h1 style={{...defaultStyle, 'font-size': '54px'}}>
+              <h1 style={{...defaultStyle, fontSize: '54px'}}>
                 {
                   this.state.serverData.user.name
                 }'s Playlists
               </h1>
               <PlaylistsCounter playlists={this.state.serverData.user.playlists}/>
               <HoursCounter playlists={this.state.serverData.user.playlists}/>
-              <Filter/>
+              <Filter onTextChange={text => this.setState({filterString: text})}/>
               {
-                this.state.serverData.user.playlists.map(playlist =>
-                  <Playlist playlist={playlist}/>
-                )
+                this.state.serverData.user.playlists
+                  .filter(playlist =>
+                    playlist.name.toLowerCase().includes(
+                      this.state.filterString.toLowerCase()
+                    )
+                  )
+                  .map(playlist =>
+                    <Playlist key={playlist.id} playlist={playlist}/>
+                  )
               }
             </div> : <h1 style={defaultStyle}>Loading...</h1>
         }

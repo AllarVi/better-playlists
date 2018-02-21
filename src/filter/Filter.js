@@ -9,7 +9,9 @@ export default class Filter extends Component {
     return (
       <div style={defaultStyle}>
         <img/>
-        <input type="text"/>
+        <input type="text" onKeyUp={
+          event => this.props.onTextChange(event.target.value)
+        }/>
       </div>
     );
   }
